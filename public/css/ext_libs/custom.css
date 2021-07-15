@@ -39,3 +39,7 @@
     margin-left:25%; 
     margin-bottom: 40px;
 }
+
+.select2 {
+    width:100%!important;
+}

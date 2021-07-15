@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Dentista;
+use App\DentistaEspecialidade;
 use App\Http\Services\DentistaService;
+use App\Http\Services\EspecialidadeService;
 use App\Http\Requests\DentistaCreateRequest;
 use App\Http\Requests\DentistaEditRequest;
 
@@ -12,9 +14,14 @@ use App\Http\Requests\DentistaEditRequest;
 class DentistaController extends Controller {
 
     private $dentistaService;
+    private $especialidadeService;
 
-    public function __construct( DentistaService $dentistaService ){
+    public function __construct( 
+        DentistaService $dentistaService,
+        EspecialidadeService $especialidadeService
+    ){
         $this->dentistaService = $dentistaService;
+        $this->especialidadeService = $especialidadeService;
     }
 
     public function index() {
@@ -22,14 +29,18 @@ class DentistaController extends Controller {
     }
 
     public function create() {
+        // dd( $this->especialidadeService->getOptionsSelect() );
         return view( 
             'admin.dentista.create',
-            ['croufOptions' => $this->dentistaService->getCROUFOptionsSelect()]
+            [
+                'croufOptions' => $this->dentistaService->getCROUFOptionsSelect(),
+                'especialidadesOptions' => $this->especialidadeService->getOptionsSelect()
+            ]
         );
     }
 
     public function store(DentistaCreateRequest $request) {
-        Dentista::create($request->all());
+        $this->dentistaService->store($request->all());
         return redirect()->route('dentista.index');
     }
 
@@ -38,20 +49,29 @@ class DentistaController extends Controller {
             'admin.dentista.edit',
             [
                 'registro' => Dentista::find($dentista), 
-                'croufOptions' => $this->dentistaService->getCROUFOptionsSelect()
+                'especialidades' => 
+                    DentistaEspecialidade::where('dentista_id', $dentista)
+                        ->pluck('especialidade_id'),
+                'croufOptions' => $this->dentistaService->getCROUFOptionsSelect(),
+                'especialidadesOptions' => $this->especialidadeService->getOptionsSelect()
             ]
         );
         return view('admin.dentista.edit', ['registro' => $dentista]);
     }
 
     public function update(DentistaEditRequest $request, $dentista) {
-        Dentista::find($dentista)->fill($request->all())->save();
+        $this->dentistaService->upload($request->all(), $dentista);
         return redirect()->route('dentista.index');
     }
     
     public function destroy($dentista) {
-        // foreach($dentista->compras as $compra) $compra->delete();
-        Dentista::find($dentista)->delete();
+        $dentista = Dentista::find($dentista);
+
+        //Remove Relations
+        foreach( $dentista->dentistaEspecialidade as $dentistaEspecialidade) 
+            $dentistaEspecialidade->delete();
+            
+        $dentista->delete(); 
         return redirect()->route('dentista.index');
     }
 

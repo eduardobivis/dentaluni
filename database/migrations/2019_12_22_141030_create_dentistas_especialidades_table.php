@@ -14,6 +14,7 @@ class CreateDentistasEspecialidadesTable extends Migration
     public function up()
     {
         Schema::create('dentistas_especialidades', function (Blueprint $table) {
+            $table->increments('id');
             $table->unsignedInteger('dentista_id');
             $table->unsignedInteger('especialidade_id');
             $table->timestamps();

@@ -8,6 +8,7 @@
     @php
         $basepath = URL('/');
         $id = \Auth::user()->id;
+        $name = ucfirst( \Auth::user()->name );
         $token = base64_encode(\Auth::user()->api_token);
         $modulo = isset(explode('.',\Request::route()->getName())[0]) 
             ? explode('.',\Request::route()->getName())[0] : '';
@@ -52,7 +53,7 @@
             <div id="content">
 
                 <!-- Topbar -->
-                @include('layouts.admin.topbar')
+                @include('layouts.admin.topbar',['nome' => $name])
 
                 <!-- Conteúdo -->
                 <div class="container-fluid">

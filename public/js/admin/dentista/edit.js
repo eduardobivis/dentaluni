@@ -3,6 +3,9 @@ $(function(){
     //Máscara
     $( '.cro' ).mask("#");
 
+    //MultiSelect
+    $('.especialidades').select2();
+
     //Validação Editar
     $("#edit").validate({
         rules: {

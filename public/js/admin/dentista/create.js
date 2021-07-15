@@ -3,6 +3,9 @@ $(function(){
     //Máscara
     $( '.cro' ).mask("#");
 
+    //MultiSelect
+    $('.especialidades').select2();
+
     //Validação Criar
     $("#create").validate({
         rules: {
@@ -32,5 +35,4 @@ $(function(){
             form.submit();
         }
     });
-
 });

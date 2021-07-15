@@ -12,6 +12,7 @@
                             <th>E-mail</th>
                             <th>CRO</th>
                             <th>CRO UF</th>
+                            <th>Especialidades</th>
                             <th class="icone-index">Editar</th>
                             <th class="icone-index">Excluir</th>
                         </tr>
@@ -23,6 +24,7 @@
                                 <td>{{ $registro->email }}</td>
                                 <td>{{ $registro->cro }}</td>
                                 <td>{{ $registro->cro_uf }}</td>
+                                <td>{{ $registro->especialidade() }}</td>
                                 <td class="text-center">
                                     <a href="{{ route('dentista.edit', $registro->id) }}">     
                                         <span class="fa fa-pencil-alt"></span>

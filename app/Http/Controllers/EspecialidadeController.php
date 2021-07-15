@@ -7,6 +7,7 @@ use App\Http\Requests\EspecialidadeCreateRequest;
 use App\Http\Requests\EspecialidadeEditRequest;
 
 class EspecialidadeController extends Controller {
+
     public function index() {
         return view(
             'admin.especialidade.index', 
@@ -35,13 +36,15 @@ class EspecialidadeController extends Controller {
         return redirect()->route('especialidade.index');
     }
     
-    public function destroy(Especialidade $especialidade) {
-        // foreach($especialidade->materiais as $material) {
-        //     foreach($material->compras as $compra) $compra->delete();
-        //     $material->delete();
-        // }
-        // $fornecedor->delete();
-        // return redirect()->route('especialidade.index');
+    public function destroy($especialidade) {
+        $especialidade = Especialidade::find($especialidade);
+
+        //Remove Relations
+        foreach( $especialidade->dentistaEspecialidade as $dentistaEspecialidade) 
+            $dentistaEspecialidade->delete();
+            
+        $especialidade->delete(); 
+        return redirect()->route('especialidade.index');
     }
     
 }
