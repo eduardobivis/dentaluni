@@ -9,7 +9,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Multilig - Login</title>
+        <title>DentalUni - Login</title>
 
         <!-- Custom fonts for this template-->
         <link href="{{ asset('css/ext_libs/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
