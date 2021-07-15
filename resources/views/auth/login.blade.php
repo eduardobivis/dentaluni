@@ -17,6 +17,8 @@
 
         <!-- Custom styles for this template-->
         <link href="{{ asset('css/ext_libs/sb-admin-2.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/ext_libs/custom.css') }}" rel="stylesheet">
+
 
     </head>
 
@@ -34,13 +36,11 @@
                 <!-- Nested Row within Card Body -->
                 <div class="row">
                 <div class="col-lg-6 d-none d-lg-block" 
-                    style="background: url({{ asset('images/login.jpeg') }});  
-                    background-position: center; 
+                    style="background: url({{ asset('images/login.jpg') }});   
                     background-size: cover;"></div>
                 <div class="col-lg-6">
                     <div class="p-5 mt-3">
-                    <img src="{{ asset('images/logo.png') }}" 
-                        style="width: 25%; margin-left:37%; margin-bottom: 40px;">
+                    <img class="logo-login" src="{{ asset('images/logo.jpg') }}">
 
 
                 <form method="POST" action="{{ route('login') }}">

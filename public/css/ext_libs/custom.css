@@ -33,3 +33,9 @@
 .avatar{
     width: 200px;
 }
+
+.logo-login {
+    width: 50%; 
+    margin-left:25%; 
+    margin-bottom: 40px;
+}
