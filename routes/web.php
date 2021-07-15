@@ -23,8 +23,3 @@ Auth::routes();
 Route::resource('/user', 'UserController')->middleware('auth');
 Route::resource('/especialidade', 'EspecialidadeController')->middleware('auth');
 Route::resource('/dentista', 'DentistaController')->middleware('auth');
-
-
-//Relatório
-Route::get('/relatorio', 'RelatorioController@getRelatorio')->name('relatorio')->middleware('auth');
-

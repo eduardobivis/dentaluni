@@ -3,19 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Http\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserCreateRequest;
 use App\Http\Requests\UserEditRequest;
 
 //Dependency Injection not working
 class UserController extends Controller {
-
-    private $service;
-
-    public function __construct(UserService $service) {
-        $this->service = $service;
-    }
 
     public function index() {
         $usuarios = User::all();
